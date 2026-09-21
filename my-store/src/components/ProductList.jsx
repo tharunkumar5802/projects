@@ -1,0 +1,35 @@
+import React, { useState, useEffect } from "react";
+
+function ProductList({cartItems,setCartItems}) {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    setTimeout(()=>{
+      fetch('https://fakestoreapi.com/products')
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+    },5000)
+  }, []);
+
+  const addToCart=(product)=>{
+    if(cartItems.find((item)=>item.id===product.id)){
+      alert('product already in cart');
+    }
+    else{
+        setCartItems([...cartItems,product])
+    }
+  }
+  return (
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+    {products.map((product)=>(
+      <div key={product.id} className="border border-gray-500 rounded-lg shadow-xl p-4 bg-white">
+        <img src={product.image} alt={product.title} className="h-40 mx-auto mb-4"/>
+        <h2 className="text-lg font-semibold text-gray-700 mb-2">{product.title}</h2>
+        <p className="text-lg text-red-600 font-bold mb-2">$ {product.price}</p>
+        <button onClick={()=>addToCart(product)} className="bg-green-500 w-full py-2 rounded-lg hover:bg-green-600 my-2">ADD TO CART</button>
+      </div>
+    ))}
+  </div>
+  );
+}
+
+export default ProductList;
