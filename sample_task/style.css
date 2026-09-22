@@ -1,0 +1,17 @@
+.sample{
+    background-color: teal;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+
+.button{
+    border-color: orangered;
+    background-color: aqua;
+    padding: 5px;
+}
